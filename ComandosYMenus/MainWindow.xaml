@@ -31,6 +31,10 @@
             CanExecute="Paste_CanExecute"/>        
     </Window.CommandBindings>
     <Window.Resources>
+        <ContextMenu x:Key="menuContextual">
+            <MenuItem Header="Copiar" Command="ApplicationCommands.Copy"/>
+            <MenuItem Header="Pegar" Command="ApplicationCommands.Paste"/>
+        </ContextMenu>
         <Style x:Key="hidenToolBarTriggerBHGC" TargetType="ToolBar">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding ElementName=BHGC, Path=IsChecked}" Value="false">
@@ -112,7 +116,7 @@
             <TextBlock Margin="3" DockPanel.Dock="Left" HorizontalAlignment="Center" VerticalAlignment="Center">Raul Marin Bernabe</TextBlock>
             <TextBlock x:Name="temporizador" Margin="3" DockPanel.Dock="Right" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
         </DockPanel>
-        <ListBox Margin="10" x:Name="lista" ItemsSource="{Binding}">
+        <ListBox Margin="10" x:Name="lista" ItemsSource="{Binding}" ContextMenu="{StaticResource menuContextual}" >
             
         </ListBox>
     </DockPanel>

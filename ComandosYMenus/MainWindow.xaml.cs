@@ -76,7 +76,7 @@ namespace ComandosYMenus
         }
         private void New_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            coleccion.Add("Item añadido a las " + DateTime.Now);
+            coleccion.Add("Item añadido a las " + DateTime.Now);            
         }
 
         private void New_CanExecute(object sender, CanExecuteRoutedEventArgs e)
