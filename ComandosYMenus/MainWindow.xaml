@@ -1,0 +1,119 @@
+﻿<Window x:Class="ComandosYMenus.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ComandosYMenus"
+        mc:Ignorable="d"
+        Title="Comandos y Menús" Height="450" Width="800"
+        Icon="imagenes/menu.ico"
+        x:Name="VentanaMain">
+    <Window.CommandBindings>
+        <CommandBinding
+            Command="ApplicationCommands.New" 
+            Executed="New_Executed"
+            CanExecute="New_CanExecute"/>
+        <CommandBinding
+            Command="local:MisComandos.Salir" 
+            Executed="Salir_Executed"
+            CanExecute="Salir_CanExecute"/>
+        <CommandBinding
+            Command="local:MisComandos.Vaciar" 
+            Executed="Vaciar_Executed"
+            CanExecute="Vaciar_CanExecute"/>
+        <CommandBinding
+            Command="ApplicationCommands.Copy" 
+            Executed="Copy_Executed"
+            CanExecute="Copy_CanExecute"/>
+        <CommandBinding
+            Command="ApplicationCommands.Paste" 
+            Executed="Paste_Executed"
+            CanExecute="Paste_CanExecute"/>        
+    </Window.CommandBindings>
+    <Window.Resources>
+        <Style x:Key="hidenToolBarTriggerBHGC" TargetType="ToolBar">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=BHGC, Path=IsChecked}" Value="false">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="hidenToolBarTriggerBHEC" TargetType="ToolBar">
+            <Style.Triggers>                
+                <DataTrigger Binding="{Binding ElementName=BHEC, Path=IsChecked}" Value="false">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Archivo">
+                <MenuItem Header="Nuevo" InputGestureText="Ctrl+N" Command="ApplicationCommands.New">
+                    <MenuItem.Icon>
+                        <Image Source="imagenes/add.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Salir" InputGestureText="Ctrl+S" Command="local:MisComandos.Salir">
+                    <MenuItem.Icon>
+                        <Image Source="imagenes/exit.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Editar">
+                <MenuItem Header="Copiar" InputGestureText="Ctrl+C" Command="ApplicationCommands.Copy">
+                    <MenuItem.Icon>
+                        <Image Source="imagenes/copy.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Pegar" InputGestureText="Ctrl+V" Command="ApplicationCommands.Paste">
+                    <MenuItem.Icon>
+                        <Image Source="imagenes/paste.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Vaciar" InputGestureText="Ctrl+P" Command="local:MisComandos.Vaciar">
+                    <MenuItem.Icon>
+                        <Image Source="imagenes/delete.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Ver">
+                <MenuItem Header="Barra de Herramientas General" IsCheckable="True" x:Name="BHGC" IsChecked="True">
+
+                </MenuItem>
+                <MenuItem Header="Barra de Herramientas Edicion" IsCheckable="True" x:Name="BHEC" IsChecked="True">
+
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar Style="{StaticResource hidenToolBarTriggerBHGC}">
+                <Button ToolTip="Nuevo" Command="ApplicationCommands.New">
+                    <Image Source="imagenes/add.ico" />
+                </Button>
+                <Button ToolTip="Salir" Command="local:MisComandos.Salir">
+                    <Image Source="imagenes/exit.ico" />
+                </Button>
+            </ToolBar>
+            <ToolBar Style="{StaticResource hidenToolBarTriggerBHEC}">
+                <Button ToolTip="Copiar" x:Name="copyButton">
+                    <Image Source="imagenes/copy.ico" />
+                </Button>
+                <Button ToolTip="Pegar" Command="ApplicationCommands.Paste">
+                    <Image Source="imagenes/paste.ico" />
+                </Button>
+                <Button ToolTip="Vaciar" Command="local:MisComandos.Vaciar">
+                    <Image Source="imagenes/delete.ico" />
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        <DockPanel DockPanel.Dock="Bottom" LastChildFill="False" Background="#FFF0F0F0">
+            <TextBlock Margin="3" DockPanel.Dock="Left" HorizontalAlignment="Center" VerticalAlignment="Center">Raul Marin Bernabe</TextBlock>
+            <TextBlock x:Name="temporizador" Margin="3" DockPanel.Dock="Right" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        </DockPanel>
+        <ListBox Margin="10" x:Name="lista" ItemsSource="{Binding}">
+            
+        </ListBox>
+    </DockPanel>
+</Window>
